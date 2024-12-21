@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <style>
+ .login-container {
+  max-width: 900px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.login-form input, .login-form button {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.login-form input[type="email"], 
+.login-form input[type="text"], 
+.login-form input[type="password"] {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.login-form input[type="email"]:focus, 
+.login-form input[type="text"]:focus, 
+.login-form input[type="password"]:focus {
+  border-color: #007bff;
+}
+
+.login-form button[type="button"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+/* Optional: Ensuring the button spans across the bottom */
+.login-form button[type="button"] {
+  grid-column: span 2;
+}
+
+
+    .data-table-container {
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+
+    }
+  </style>
+
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+
+:root{
+	--white: #fff;
+	--bg-color: #fef7ef;
+	--navbar-color: #4424a7;
+	--text-color: #373737;
+	--icon-color: #09c0d7;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	text-decoration: none;
+	list-style: none;
+	font-family: 'Open Sans', sans-serif;
+}
+
+body{
+	background: var(--bg-color);
+	color: var(--text-color);
+	padding: 30px;
+	font-size: 14px;
+}
+
+.wrapper{
+	background: var(--white);
+	height: calc(150vh - 60px);
+	border-radius: 15px;
+	display: flex;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+	overflow: hidden;
+	position: relative;
+}
+
+.main_container{
+	width: calc(110% - 225px);
+	padding: 30px;
+	overflow: auto;
+	transition: all 0.3s ease;
+	display: none;
+}
+
+.main_container.active {
+	display: block;
+}
+
+.main_container p{
+	line-height: 22px;
+	margin-bottom: 20px;
+}
+
+.side_bar{
+	width: 225px;
+	height: 100%;
+	background: var(--navbar-color);
+	border-radius: 15px;
+	padding: 20px;
+	padding-right: 0;
+	transition: all 0.3s ease;
+}
+
+.side_bar .side_bar_top{
+	padding-bottom: 100px;
+	position: relative;
+}
+
+.side_bar .side_bar_top .logo_wrap{
+	text-align: center;
+	margin-left: -20px;
+}
+
+.side_bar .side_bar_top .logo_wrap a{
+	color: var(--white);
+	font-weight: 700;
+	letter-spacing: 2px;
+	font-size: 20px;
+	padding: 35px 0;
+	border-bottom: 1px solid var(--icon-color);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.side_bar .side_bar_top .logo_wrap a img{
+	width: 35px;
+	height: 35px;
+	margin-right: 10px;
+}
+
+.side_bar .side_bar_menu{
+	position: absolute;
+	bottom: 32px;
+	right: -22px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: var(--navbar-color);
+	border: 4px solid var(--white);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.side_bar .side_bar_menu .menu{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.side_bar .side_bar_menu .i{
+	color: var(--white);
+	font-size: 18px;
+	transform: rotate(180deg);
+	transition: all 0.3s ease;
+}
+
+.side_bar .side_bar_bottom ul li{
+	position: relative;
+}
+
+.side_bar .side_bar_bottom ul li a{
+	display: flex;
+	align-items: center;
+	padding: 15px 25px;		
+	color: var(--white);
+	margin-bottom: 5px;				
+}
+
+.side_bar .side_bar_bottom ul li a .item:hover{
+	color: var(--icon-color);
+}
+
+.side_bar .side_bar_bottom ul li a .icon{
+	margin-right: 10px;
+	color: var(--icon-color);
+	font-size: 16px;
+	height: 16px;
+}
+
+.side_bar .side_bar_bottom ul li.active a{
+	background: var(--white);
+	color: var(--text-color);
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+
+.side_bar .side_bar_bottom ul li.active .top_curve,
+.side_bar .side_bar_bottom ul li.active .bottom_curve{
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 20px;
+	background: var(--white);
+}
+
+.side_bar .side_bar_bottom ul li.active .top_curve{
+	top: -20px;
+}
+
+.side_bar .side_bar_bottom ul li.active .bottom_curve{
+	bottom: -20px;	
+}
+
+.side_bar .side_bar_bottom ul li.active .top_curve:before,
+.side_bar .side_bar_bottom ul li.active .bottom_curve:before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--navbar-color);	
+}
+
+.side_bar .side_bar_bottom ul li.active .top_curve:before{
+	border-bottom-right-radius: 25px;
+}
+
+.side_bar .side_bar_bottom ul li.active .bottom_curve:before{
+	border-top-right-radius: 25px;
+}
+
+.shadow{
+	display: none;
+}
+
+@media screen and (min-width: 1024px){
+	.wrapper.active .side_bar{
+		margin-left: -225px;
+	}
+
+	.wrapper.active .side_bar .side_bar_menu{
+		right: -32px;
+	}
+
+	.wrapper.active .side_bar .side_bar_menu .i{
+		margin-left: 8px;
+		transform: rotate(0);
+	}
+
+	.wrapper.active .main_container{
+		width: 100%;
+		padding-left: 40px;
+	}
+}
+
+@media screen and (max-width: 768px){
+	.wrapper .side_bar{
+		position: absolute;
+		top: 0;
+		left: -225px;
+	}
+	.wrapper .side_bar .side_bar_menu{
+		right: -32px;
+	}
+	.wrapper .side_bar .side_bar_menu .i{
+		margin-left: 8px;
+		transform: rotate(0);
+	}
+	.wrapper .main_container{
+		width: 100%;
+		padding-left: 40px;
+	}
+	.wrapper.active .side_bar{
+		left: 0;
+	}
+	.wrapper.active .side_bar .side_bar_menu{
+		right: -22px;
+	}
+
+	.wrapper.active .side_bar .side_bar_menu .i{
+		margin: 0;
+		transform: rotate(180deg);
+	}
+	.wrapper.active .shadow{
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,1);
+		opacity: 0.25;
+	}	
+}
+
+
+
+
+        h2.faq-heading {
+            font-family: "Inter", sans-serif;
+            text-align: center;
+            font-weight: 300;
+            font-size: 28px;
+            color: #1d3557;
+            margin: 8px 0;
+            margin-top: 60px;
+        }
+
+    
+
+        .faq-container .question-container {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .faq-container .question {
+            display: flex;
+            justify-content: space-between;
+            gap: 32px;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 16px 24px;
+            cursor: pointer;
+        }
+
+        .faq-container .question .question-icon {
+            width: 20px;
+            height: 20px;
+            background: #eee;
+            padding: 4px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            transition: all 300ms ease;
+        }
+
+        .faq-container .question-container.expanded .question-icon {
+            background: #2a9d8f;
+            color: #fff;
+            transform: rotateZ(180deg);
+        }
+
+        .faq-container .answer {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .faq-container .answer .answer-icon {
+            width: 20px;
+            flex-shrink: 0;
+            color: blue;
+            display: flex;
+            margin-top: 5px;
+        }
+
+        .faq-container .answer-container {
+            padding: 0px 32px;
+            background: #edf2f4;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 300ms ease;
+        }
+
+        .faq-container .question-container.expanded .answer-container {
+            max-height: 500px;
+            padding: 8px 32px;
+        }
+
+    icon1 {
+    display: block;
+    text-align: center; /* Center the icon */
+    margin: 10px auto; /* Adjust spacing */
+    }
+  .icon1 ion-icon {
+    font-size: 48px; /* Adjust the icon size to be larger */
+    color: #007bff; /* Change color if needed */
+   }
+
+        .radius-10 {
+            border-radius: 10px !important;
+        }
+
+        .border-info {
+            border-left: 5px solid #0dcaf0 !important;
+        }
+
+        .border-danger {
+            border-left: 5px solid #fd3550 !important;
+        }
+
+        .border-success {
+            border-left: 5px solid #15ca20 !important;
+        }
+
+        .border-warning {
+            border-left: 5px solid #ffc107 !important;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid rgba(0, 0, 0, 0);
+            border-radius: .25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px 0 rgb(218 218 253 / 85%), 0 4px 12px 0 rgb(206 206 238 / 74%);
+        }
+
+        .bg-gradient-scooter {
+            background: #17ead9;
+            background: -webkit-linear-gradient(45deg, #17ead9, #6078ea) !important;
+            background: linear-gradient(45deg, #17ead9, #6078ea) !important;
+        }
+
+        .widgets-icons-2 {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ededed;
+            font-size: 27px;
+            border-radius: 10px;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        .text-white {
+            color: #fff !important;
+        }
+
+        .ms-auto {
+            margin-left: auto !important;
+        }
+
+        .bg-gradient-bloody {
+            background: #f54ea2;
+            background: -webkit-linear-gradient(45deg, #f54ea2, #ff7676) !important;
+            background: linear-gradient(45deg, #f54ea2, #ff7676) !important;
+        }
+
+        .bg-gradient-ohhappiness {
+            background: #00b09b;
+            background: -webkit-linear-gradient(45deg, #00b09b, #96c93d) !important;
+            background: linear-gradient(45deg, #00b09b, #96c93d) !important;
+        }
+
+        .bg-gradient-blooker {
+            background: #ffdf40;
+            background: -webkit-linear-gradient(45deg, #ffdf40, #ff8359) !important;
+            background: linear-gradient(45deg, #ffdf40, #ff8359) !important;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            margin: 10px;
+            min-width: 220px;
+            max-width: 300px;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .align-items-center {
+            align-items: center !important;
+        }
+
+        .text-secondary {
+            color: #6c757d !important;
+        }
+
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .my-1 {
+            margin-top: .25rem !important;
+            margin-bottom: .25rem !important;
+        }
+
+        .font-13 {
+            font-size: 13px !important;
+        }
+</style>
+
+</head>
+<body>
+<div id="loginSection">
+    <div class="login-container">
+<center> <span class="icon1">
+    <ion-icon name="person-circle-outline"></ion-icon>
+</span></center>
+        <h2>VIP MEMBERSHIP LOGIN </h2>
+        <form id="loginForm" class="login-form">
+ <input type="email" id="email" placeholder="Email ID" required>
+    <input type="text" id="username" placeholder="Username" required pattern="\d+">
+    <input type="password" id="password" placeholder="Password" required 
+           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}" 
+           title="Password must be at least 8 characters long and include uppercase letters, lowercase letters, and digits.">
+            <input type="text" id="mobileNumber" placeholder="Mobile Number" required>
+            <input type="text" id="country" placeholder="Country" required>
+            <input type="text" id="postalCode" placeholder="Type @ 24H1, 24H2" required>
+            <button type="button" class="btn btn-primary" onclick="checkLogin()">Login</button>
+            <div id="result" class="mt-3"></div>
+        </form>
+    </div>
+</div>
+
+<div id="mainContent" style="display: none;">
+
+
+    <div class="wrapper">
+        <div class="shadow"></div>
+        <div class="side_bar">
+            <div class="side_bar_top">
+                <div class="logo_wrap">
+                    <a href="#">
+                        <img src="https://cdn.bio.link/uploads/profile_pictures/2023-06-15/etVNEktTBAHeqr3VCEzEkgYUuPMSmigA.png" alt="logo">
+                        <span class="text">Rameez</span>
+                    </a>
+                </div>
+                <div class="side_bar_menu">
+                    <div class="menu">
+                        <ion-icon class="i" name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="side_bar_bottom">
+                <ul>
+                    <li class="active" data-target="dashboard">
+                        <span class="top_curve"></span>
+                        <a href="#">
+                            <span class="icon"><ion-icon name="home-sharp"></ion-icon></span>
+                            <span class="item">Dashboard</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+                    <li data-target="flights">
+                        <span class="top_curve"></span>
+                        <a href="#">
+                      <span class="icon"><ion-icon name="cloud-download-outline"></ion-icon></span>
+                            <span class="item">Codes</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+                    <li data-target="wallet">
+                        <span class="top_curve"></span>
+                        <a href="#">
+                            <span class="icon"><ion-icon name="wallet-sharp"></ion-icon></span>
+                            <span class="item">Wallet</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+                    <li data-target="reports">
+                        <span class="top_curve"></span>
+                        <a href="#">
+                          <span class="icon"><ion-icon name="help-circle-outline"></ion-icon></span>
+                            <span class="item">FAQS</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+                      <li data-target="details">
+                        <span class="top_curve"></span>
+                        <a href="#">
+                            <span class="icon"><ion-icon name="newspaper-sharp"></ion-icon></span>
+                            <span class="item">Profile</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+                    <li onclick="logout()">
+                        <span class="top_curve"></span>
+                        <a href="#">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                            <span class="item">Logout</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="dashboard" class="main_container active">
+            <h1>Google Appscript & Sheets</h1>
+            <p>Overview About Our Youtube Channel</p>
+            <div class="container">
+        <div class="card-container">
+            <div class="card radius-10 border-start border-0 border-3 border-info">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total Videos</p>
+                            <h4 class="my-1 text-info" id="value1">140+</h4>
+                            <p class="mb-0 font-13" id="percent1">8 Videos Per Month</p>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card radius-10 border-start border-0 border-3 border-danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total WebApps</p>
+                            <h4 class="my-1 text-danger" id="value2">135+</h4>
+                            <p class="mb-0 font-13" id="percent2">+2.4% from last week</p>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto">
+                            <i class="fa fa-dollar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card radius-10 border-start border-0 border-3 border-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Bounce Rate</p>
+                            <h4 class="my-1 text-success" id="value3">34.6%</h4>
+                            <p class="mb-0 font-13" id="percent3">-4.5% from last week</p>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                            <i class="fa fa-bar-chart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card radius-10 border-start border-0 border-3 border-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Total Customers</p>
+                            <h4 class="my-1 text-warning" id="value4">8.4K</h4>
+                            <p class="mb-0 font-13" id="percent4">+8.4% from last week</p>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto">
+                            <i class="fa fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <style>
+      #search-bar {
+        margin-bottom: 10px;
+      }
+    </style>
+    <script>
+      function fetchData() {
+        google.script.run.withSuccessHandler(renderTable).getDataYoutube();
+      }
+
+      function renderTable(data) {
+        var dataTableData = data.map(function(row) {
+          return [
+            row[0],
+            '<a href="' + row[1] + '" target="_blank" class="btn btn-primary">Watch Now</a>',
+            row[2]
+          ];
+        });
+
+        $('#example').DataTable({
+          data: dataTableData,
+          columns: [
+            { title: "Title" },
+            { title: "URL" },
+            { title: "Views" }
+          ],
+          "order": [[2, 'desc']],
+          "pageLength": 50,  // Set default number of rows per page
+          "lengthMenu": [ [50, 75, 100, -1], [50, 75, 100, "All"] ]  // Dropdown options
+        });
+
+        // Search functionality
+        $('#search-bar').on('keyup', function() {
+          $('#example').DataTable().search(this.value).draw();
+        });
+      }
+
+      $(document).ready(function() {
+        fetchData();
+      });
+    </script>
+    <div class="container mt-4">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <input type="text" id="search-bar" class="form-control" placeholder="Search...">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table id="example" class="table table-striped table-bordered" width="100%"></table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+        </div>
+        <div id="flights" class="main_container">
+            <center><h1>VIP MEMBERSHIP CODES</h1></center>
+            <div id="dataTableContainer" class="data-table-container">
+            <center>    <h3>All Youtube Videos Code</h3></center>
+                <table id="dataTable" class="display table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Text</th>
+                            <th>URL</th>
+                            <th>File URL</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="wallet" class="main_container">
+            <h1>Wallet</h1>
+            <p>Comming Soon</p>
+            
+        </div>
+        <div id="reports" class="main_container">
+            <h1>FAQS</h1>
+            <p>Read Here Our MEMBERSHIP Policy</p>
+            <div class="faq-container"></div>
+        </div>
+        <div id="details" class="main_container">
+            <h1>Profile</h1>
+            <p>All About Your Information</p>
+                  <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userUsername">Username:</label>
+                            <input type="text" id="userUsername" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userEmail">Email:</label>
+                            <input type="text" id="userEmail" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userMobile">Mobile Number:</label>
+                            <input type="text" id="userMobile" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userCountry">Country:</label>
+                            <input type="text" id="userCountry" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userPostal">Postal Code:</label>
+                            <input type="text" id="userPostal" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+function checkLogin() {
+    var email = document.getElementById("email").value;
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var mobileNumber = document.getElementById("mobileNumber").value;
+    var country = document.getElementById("country").value;
+    var postalCode = document.getElementById("postalCode").value;
+
+    // Check for empty fields
+    if (!email || !username || !password || !mobileNumber || !country || !postalCode) {
+        Swal.fire({
+            title: 'Error',
+            text: 'All fields are required.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: 'Connecting to Server',
+        text: 'Please wait...',
+        icon: 'info',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    setTimeout(() => {
+        google.script.run.withSuccessHandler(function(response) {
+            Swal.close();
+            if (response.success) {
+                if (response.otpSent) {
+                    function promptForOtp() {
+                        Swal.fire({
+                            title: 'Enter OTP',
+                            input: 'text',
+                            inputPlaceholder: 'Enter 6-digit OTP',
+                            inputAttributes: {
+                                maxlength: 6,
+                                autocapitalize: 'off',
+                                autocorrect: 'off'
+                            },
+                            inputValidator: (value) => {
+                                if (!value || value.length !== 6) {
+                                    return 'Please enter a 6-digit OTP';
+                                }
+                            },
+                            showCancelButton: true,
+                            cancelButtonText: 'Contact Provider',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Verify',
+                            preConfirm: (otp) => {
+                                return new Promise((resolve) => {
+                                    google.script.run.withSuccessHandler(function(otpResponse) {
+                                        if (otpResponse.success) {
+                                            resolve(otpResponse);
+                                        } else {
+                                            Swal.showValidationMessage(otpResponse.message);
+                                            resolve(false);
+                                        }
+                                    }).verifyOtp(email, otp);
+                                });
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var otpResponse = result.value;
+                                if (otpResponse.success) {
+                                    Swal.fire('Success', 'OTP verified. Fetching data...', 'success');
+                                    setTimeout(() => {
+                                        document.getElementById('loginSection').style.display = 'none';
+                                        document.getElementById('mainContent').style.display = 'block';
+
+                                        // Update UI with user data without storing in localStorage
+                                        document.getElementById('userUsername').value = otpResponse.userData.username;
+                                        document.getElementById('userEmail').value = otpResponse.userData.email;
+                                        document.getElementById('userMobile').value = otpResponse.userData.mobileNumber;
+                                        document.getElementById('userCountry').value = otpResponse.userData.country;
+                                        document.getElementById('userPostal').value = otpResponse.userData.postalCode;
+
+                                        populateDataTable(otpResponse.data);
+                                    }, 2000);
+                                } else {
+                                    promptForOtp(); // Retry on failure
+                                }
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                window.open('https://wa.me/923224083545', '_blank');
+                            }
+                        });
+                    }
+
+                    promptForOtp(); // Initial call to prompt for OTP
+                } else {
+                    document.getElementById('result').innerText = response.message;
+                }
+            } else {
+                document.getElementById('result').innerText = 'Invalid credentials. Please try again.';
+            }
+        }).checkLogin(email, username, password, mobileNumber, country, postalCode);
+    }, 2000);
+}
+
+
+
+    function populateDataTable(data) {
+        var dataTable = $('#dataTable').DataTable();
+        dataTable.clear();
+
+        data.forEach(function(row) {
+            dataTable.row.add([
+                row.title,
+                row.text,
+                '<button class="btn btn-primary watchNow" onclick="window.open(\'' + row.url + '\', \'_blank\')">Watch Now</button>',
+                '<button class="btn btn-success googleSheet" onclick="window.open(\'' + row.fileUrl + '\', \'_blank\')">Google Sheet</button>'
+            ]).draw();
+        });
+    }
+
+  function logout() {
+    Swal.fire({
+        title: 'Are you sure you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, logout',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#dc3545'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('loginForm').reset();
+        }
+    });
+}
+
+
+    function checkSession() {
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('mainContent').style.display = 'none';
+}
+</script>
+
+<script>
+var li_items = document.querySelectorAll(".side_bar_bottom ul li");
+var side_bar_menu = document.querySelector(".side_bar_menu");
+var wrapper = document.querySelector(".wrapper");
+var main_containers = document.querySelectorAll(".main_container");
+
+li_items.forEach(function(li_main){
+	li_main.addEventListener("click", function(){
+		li_items.forEach(function(li){
+			li.classList.remove("active");
+		});
+		li_main.classList.add("active");
+		
+		var target = li_main.getAttribute("data-target");
+		main_containers.forEach(function(container){
+			if(container.id === target) {
+				container.classList.add("active");
+			} else {
+				container.classList.remove("active");
+			}
+		});
+	});
+});
+
+side_bar_menu.addEventListener("click", function(){
+	wrapper.classList.toggle("active");
+});
+</script>
+
+
+
+
+<script>
+    google.script.run.withSuccessHandler(displayFAQ).getFAQDataFromSheet();
+
+    function displayFAQ(FAQData) {
+        const FAQContainer = document.querySelector(".faq-container");
+        FAQData.forEach(function (q, index) {
+            const answerHTML = q.answer
+                .map(function (a) {
+                    return `<div class="answer">
+              <span class="answer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+                </svg>
+              </span>
+              ${a}
+            </div>`;
+                })
+                .join("");
+
+            const html = `<div class="question-container">
+            <div class="question">
+                ${q.question}
+                <span class="question-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></span>
+            </div>
+            <div class="answer-container">
+                ${answerHTML}
+            </div>
+          </div>`;
+
+            const questionContainer = document.createElement("div");
+            questionContainer.classList.add("question-container");
+            questionContainer.innerHTML = html;
+            FAQContainer.appendChild(questionContainer);
+
+            const question = questionContainer.querySelector(".question");
+
+            question.addEventListener("click", function () {
+                const isExpanded = !questionContainer.classList.contains("expanded");
+                removeAllExpanded();
+                questionContainer.classList.toggle("expanded", isExpanded);
+
+                const answerContainer = questionContainer.querySelector(".answer-container");
+                answerContainer.style.maxHeight = isExpanded ? `${answerContainer.scrollHeight}px` : "0";
+            });
+        });
+    }
+
+    function removeAllExpanded() {
+        const questionContainers = document.querySelectorAll(".faq-container .question-container");
+        questionContainers.forEach(function (q) {
+            q.classList.remove("expanded");
+            const answerContainer = q.querySelector(".answer-container");
+            answerContainer.style.maxHeight = "0";
+        });
+    }
+</script>
+
+
+<script>
+  $(document).ready(function(){
+			
+	$('#newsTicker1').breakingNews();			
+
+});
+</script>
+
