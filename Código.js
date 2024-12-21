@@ -1,3 +1,5 @@
+// versão: v1.0.0
+
 var ss = SpreadsheetApp.openById('1BSKS_YE0APZC5Az364rEYyUwCyO7A3tu0wX38T6t3w0');
 
 function doGet(e) { 
